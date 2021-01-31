@@ -2,9 +2,13 @@
   "name": "apiproducts",
   "version": "1.0.0",
   "description": "api products",
-  "main": "app.js",
+  "main": "auth.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon auth.js",
+    "startlintall": "npm run startlint && npm run startlintroutes && npm run startlintmodels ",
+    "startlint": "npx eslint *.js",
+    "startlintroutes": "npx eslint routes/*.js",
+    "startlintmodels": "npx eslint models/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -22,6 +26,7 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.14",
     "nodemon": "^2.0.7"

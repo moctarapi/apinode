@@ -1,16 +1,17 @@
 const express = require('express')
-const router = express.Router()
-const Product=require('../models/Products')
+const router  = express.Router()
+const Product = require('../models/Products')
+const token   = require('../token')
 
 // Get all routes
-router.get('/', async (req,res) => {
+router.get('/',token.authenticateToken, async (req,res) => {
 	const products = await Product.find()
 
 	res.json(products)
 })
 
 // Create new product
-router.post('/new', async (req,res) => {
+router.post('/new',token.authenticateToken, async (req,res) => {
 
 	try{
 		const newProduct = new Product(req.body)
@@ -29,7 +30,7 @@ router.post('/new', async (req,res) => {
 })
 
 // Get specific product
-router.get('/:id', async (req, res) =>{
+router.get('/:id',token.authenticateToken, async (req, res) =>{
 
 	try{
 		const product = await Product.findById({ _id: req.params.id })
@@ -46,7 +47,7 @@ router.get('/:id', async (req, res) =>{
 })
 
 // Delete a product
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',token.authenticateToken, async (req, res) => {
 
 	try{
 		const result = await Product.findByIdAndDelete({ _id: req.params.id })
@@ -62,7 +63,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 // Update a product
-router.patch('/:id', async (req, res) => {
+router.patch('/:id',token.authenticateToken, async (req, res) => {
 
 	try{
 		const product = await Product.updateOne({_id: req.params.id}, {$set: req.body})
