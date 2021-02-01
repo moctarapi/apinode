@@ -4,6 +4,7 @@ const express    = require('express')
 const mongoose   = require('mongoose')
 const bodyParser = require('body-parser')
 const token      = require('./token')
+const cors       = require('cors')
 
 // Create express app
 const app = express()
@@ -22,6 +23,8 @@ db.once('open', () => {
 
 // Middleware
 app.use(bodyParser.json())
+// CORS-enabled for all origins
+app.use(cors())
 
 // Routes
 app.get('/',token.authenticateToken, (req, res) => {

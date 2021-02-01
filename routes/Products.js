@@ -3,6 +3,7 @@ const router  = express.Router()
 const Product = require('../models/Products')
 const token   = require('../token')
 
+
 // Get all routes
 router.get('/',token.authenticateToken, async (req,res) => {
 	const products = await Product.find()
@@ -10,6 +11,15 @@ router.get('/',token.authenticateToken, async (req,res) => {
 	res.json(products)
 })
 
+
+
+/*
+router.get('/', async (req,res) => {
+	const products = await Product.find()
+
+	res.json(products)
+})
+*/
 // Create new product
 router.post('/new',token.authenticateToken, async (req,res) => {
 
